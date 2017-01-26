@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Scanner;
@@ -68,6 +69,7 @@ public class AddressBook {
      */
     private static final String MESSAGE_ADDED = "New person added: %1$s, Phone: %2$s, Email: %3$s";
     private static final String MESSAGE_ADDRESSBOOK_CLEARED = "Address book has been cleared!";
+    private static final String MESSAGE_ADDRESSBOOK_SORTED = "Address book has been sorted!";
     private static final String MESSAGE_COMMAND_HELP = "%1$s: %2$s";
     private static final String MESSAGE_COMMAND_HELP_PARAMETERS = "\tParameters: %1$s";
     private static final String MESSAGE_COMMAND_HELP_EXAMPLE = "\tExample: %1$s";
@@ -121,6 +123,10 @@ public class AddressBook {
                                                     + "the last find/list call.";
     private static final String COMMAND_DELETE_PARAMETER = "INDEX";
     private static final String COMMAND_DELETE_EXAMPLE = COMMAND_DELETE_WORD + " 1";
+    
+    private static final String COMMAND_SORT_WORD = "sort";
+    private static final String COMMAND_SORT_DESC = "Displays all persons information in alphabetical order.";
+    private static final String COMMAND_SORT_EXAMPLE = COMMAND_SORT_WORD;
 
     private static final String COMMAND_CLEAR_WORD = "clear";
     private static final String COMMAND_CLEAR_DESC = "Clears address book permanently.";
@@ -372,6 +378,8 @@ public class AddressBook {
             return executeListAllPersonsInAddressBook();
         case COMMAND_DELETE_WORD:
             return executeDeletePerson(commandArgs);
+        case COMMAND_SORT_WORD:
+        	return executeSortAndListAllPersonsInAddressBook();
         case COMMAND_CLEAR_WORD:
             return executeClearAddressBook();
         case COMMAND_HELP_WORD:
@@ -560,6 +568,23 @@ public class AddressBook {
         		getMessageForFormattedPersonData(deletedPerson));
     }
 
+    /**
+     * Display all persons' information in alphabetical order.
+     * @return 
+     * 
+     * @return feedback display message for the operation result
+     */
+    private static String executeSortAndListAllPersonsInAddressBook() {
+    	ArrayList<String[]> toBeSorted = getAllPersonsInAddressBook();
+    	Collections.sort(toBeSorted, new Comparator<String[]>() {
+    		public int compare(String[] p1, String[] p2) {
+    			return p1[0].toLowerCase().compareTo(p2[0].toLowerCase());
+    		}
+    	});
+    	showToUser(toBeSorted);
+    	return MESSAGE_ADDRESSBOOK_SORTED;
+    }
+    
     /**
      * Clears all persons in the address book.
      *
