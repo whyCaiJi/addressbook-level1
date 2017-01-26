@@ -548,7 +548,8 @@ public class AddressBook {
      * @return whether it is valid
      */
     private static boolean isDisplayIndexValidForLastPersonListingView(int index) {
-        return index >= DISPLAYED_INDEX_OFFSET && index < latestPersonListingView.size() + DISPLAYED_INDEX_OFFSET;
+        return index >= DISPLAYED_INDEX_OFFSET 
+        		&& index < latestPersonListingView.size() + DISPLAYED_INDEX_OFFSET;
     }
 
     /**
@@ -559,7 +560,8 @@ public class AddressBook {
      * @return successful delete person feedback message
      */
     private static String getMessageForSuccessfulDelete(String[] deletedPerson) {
-        return String.format(MESSAGE_DELETE_PERSON_SUCCESS, getMessageForFormattedPersonData(deletedPerson));
+        return String.format(MESSAGE_DELETE_PERSON_SUCCESS, 
+        		getMessageForFormattedPersonData(deletedPerson));
     }
 
     /**
@@ -662,7 +664,8 @@ public class AddressBook {
      * @return formatted listing message with index
      */
     private static String getIndexedPersonListElementMessage(int visibleIndex, String[] person) {
-        return String.format(MESSAGE_DISPLAY_LIST_ELEMENT_INDEX, visibleIndex) + getMessageForFormattedPersonData(person);
+        return String.format(MESSAGE_DISPLAY_LIST_ELEMENT_INDEX, visibleIndex) + 
+        		getMessageForFormattedPersonData(person);
     }
 
     /**
@@ -672,8 +675,8 @@ public class AddressBook {
      * @return formatted message showing internal state
      */
     private static String getMessageForFormattedPersonData(String[] person) {
-        return String.format(MESSAGE_DISPLAY_PERSON_DATA,
-                getNameFromPerson(person), getPhoneFromPerson(person), getEmailFromPerson(person));
+        return String.format(MESSAGE_DISPLAY_PERSON_DATA, getNameFromPerson(person), 
+        		getPhoneFromPerson(person), getEmailFromPerson(person));
     }
 
     /**
@@ -887,8 +890,8 @@ public class AddressBook {
      * @return encoded string
      */
     private static String encodePersonToString(String[] person) {
-        return String.format(PERSON_STRING_REPRESENTATION,
-                getNameFromPerson(person), getPhoneFromPerson(person), getEmailFromPerson(person));
+        return String.format(PERSON_STRING_REPRESENTATION, getNameFromPerson(person), 
+        		getPhoneFromPerson(person), getEmailFromPerson(person));
     }
 
     /**
