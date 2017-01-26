@@ -1,12 +1,5 @@
 package seedu.addressbook;
 
-/*
- * NOTE : =============================================================
- * This class is written in a procedural fashion (i.e. not Object-Oriented)
- * Yes, it is possible to write non-OO code using an OO language.
- * ====================================================================
- */
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,6 +15,14 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
+
+/*
+ * NOTE : =============================================================
+ * This class is written in a procedural fashion (i.e. not Object-Oriented)
+ * Yes, it is possible to write non-OO code using an OO language.
+ * ====================================================================
+ */
+
 
 /*
  * NOTE : =============================================================
@@ -210,13 +211,17 @@ public class AddressBook {
         showWelcomeMessage();
         processProgramArgs(args);
         loadDataFromStorage();
-        while (true) {
+        runProgramme();
+    }
+
+	private static void runProgramme() {
+		while (true) {
             String userCommand = getUserInput();
             echoUserCommand(userCommand);
             String feedback = executeCommand(userCommand);
             showResultToUser(feedback);
         }
-    }
+	}
 
     /*
      * NOTE : =============================================================
@@ -926,7 +931,7 @@ public class AddressBook {
                 extractEmailFromPersonString(encoded)
         );
         // check that the constructed person is valid
-        return isPersonDataValid(decodedPerson) ? Optional.of(decodedPerson) : Optional.empty();
+        return (Optional<String[]>) (isPersonDataValid(decodedPerson) ? Optional.of(decodedPerson) : Optional.empty());
     }
 
     /**
